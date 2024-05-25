@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Social Media Post Scheduler</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>AI-Powered Social Media Post Scheduler</h1>
+        <h3>Revolutionize Your Social Media Strategy: Introducing AI-Powered Scheduler! Effortlessly Plan, Generate, and
+            Schedule Engaging Content with Intelligent Suggestions. Maximize Your Impact and Efficiency Today!</h3>
+        <form method="POST">
+            <textarea name="prompt" placeholder="Enter a topic or idea" required></textarea>
+            <button type="submit" name="generate">Generate Post</button>
+        </form>
+        {% if suggested_content %}
+        <h2>Suggested Post</h2>
+        <p>{{ suggested_content }}</p>
+        <form method="POST">
+            <textarea name="content">{{ suggested_content }}</textarea>
+            <input type="datetime-local" name="post_time" required>
+            <button type="submit">Schedule Post</button>
+        </form>
+        {% endif %}
+        <h2>Scheduled Posts</h2>
+        <ul>
+            {% for post in posts %}
+            <li>{{ post[1] }} - {{ post[2] }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+
+</html>
